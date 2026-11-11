@@ -118,15 +118,6 @@ else:
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
-        # Render Circular Logo or Fallback Gear Emoji safely
-        if logo_base64:
-            st.markdown(
-                f'<div style="text-align: center; margin-bottom: 8px;"><img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>',
-                unsafe_allow_html=True
-            )
-        else:
-            st.markdown('<div style="text-align: center; font-size: 3rem; margin-bottom: 8px;">⚙️</div>', unsafe_allow_html=True)
-        
         # Header Titles and Divider
         st.markdown("""
             <div style="text-align: center; margin-bottom: 0.5rem;">
