@@ -170,7 +170,7 @@ else:
     col1, col_center, col2 = st.columns([1.25, 1, 0.15])
 
     with col_center:
-        st.markdown('<div class="login-container">', unsafe_allow_html=True)
+        st.markdown('<div class="login-container" style="margin-top: -60px;">', unsafe_allow_html=True)
         
         # Render Logo naturally without circle wrapper or borders
         if logo_base64:
