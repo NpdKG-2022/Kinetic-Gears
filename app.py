@@ -18,7 +18,7 @@ def get_base64_of_bin_file(bin_file):
         return None
 
 IMG_FILENAME = "background_login.png" 
-LOGO_FILENAME = "KG-Logo.jpg"[cite: 7]
+LOGO_FILENAME = "KG-Logo.jpg"
 
 img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 logo_base64 = get_base64_of_bin_file(LOGO_FILENAME)
