@@ -131,12 +131,15 @@ else:
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
-        # Header with Circular Logo Frame, Title and Tagline
-        logo_tag = f'<img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 8px;" />' if logo_base64 else '<div style="font-size: 3rem;">⚙️</div>'
+        # Header with Safe Fallback for Logo
+        if logo_base64:
+            logo_tag = f'<div style="text-align: center; margin-bottom: 8px;"><img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>'
+        else:
+            logo_tag = '<div style="text-align: center; font-size: 3rem; margin-bottom: 8px;">⚙️</div>'
         
         st.markdown(f"""
+            {logo_tag}
             <div style="text-align: center; margin-bottom: 0.5rem;">
-                {logo_tag}
                 <div style="font-weight: 800; font-size: 2.0rem; color: #000000; letter-spacing: 0.5px;">
                     KINETIC GEARS
                 </div>
