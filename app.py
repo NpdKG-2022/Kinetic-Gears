@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- Helper Function: Convert Local Image to Base64 ---
+# --- Helper Function: Convert Image to Base64 ---
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -21,20 +21,20 @@ IMG_FILENAME = "background_login.png"
 try:
     img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 except FileNotFoundError:
-    st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your repository.")
+    st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your repository. Please make sure it is uploaded.")
     st.stop()
 
 # --- Custom Styling & Layout ---
 st.markdown(
     f"""
     <style>
-    /* 1. Set the background image on the main container */
-    [data-testid="stAppViewContainer"] > .main {{
+    /* 1. Set the background image across the entire app */
+    .stApp {{
         background-image: url("data:image/png;base64,{img_base64}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: local;
+        background-attachment: fixed;
     }}
 
     /* 2. Hide default Streamlit Header and Footer */
@@ -47,9 +47,10 @@ st.markdown(
     /* 3. Style input fields */
     .stTextInput>div>div>input {{
         color: #0F172A;
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(255, 255, 255, 0.95);
         border-radius: 8px;
         border: 1px solid #CBD5E1;
+        padding: 0.6rem 1rem;
     }}
 
     /* 4. Login Form Card Wrapper */
@@ -59,9 +60,10 @@ st.markdown(
         border-radius: 20px;
         width: 100%;
         max-width: 420px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         border: 1px solid #E2E8F0;
         margin: 0 auto;
+        backdrop-filter: blur(8px);
     }}
     </style>
     """,
@@ -73,7 +75,6 @@ if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 
 def check_login():
-    # Use Streamlit Secrets in production for secure authentication
     valid_user = st.secrets.get("ADMIN_USER", "admin")
     valid_pass = st.secrets.get("ADMIN_PASSWORD", "gear123")
     
@@ -99,13 +100,12 @@ if st.session_state['logged_in']:
     st.success("Successfully logged into the precision manufacturing platform workspace.")
 
 else:
-    # Spacer to align the form position vertically with your background image layout
+    # Vertical spacers to match the right-side card position on your background image
     st.write("")
     st.write("")
-    st.write("")
-
-    # Create columns to shift the login card to the right side matching your graphic
-    col1, col_center, col2 = st.columns([1.2, 1, 0.3])
+    
+    # Create columns to push the login card to the right side
+    col1, col_center, col2 = st.columns([1.1, 1, 0.2])
 
     with col_center:
         st.markdown('<div class="login-box">', unsafe_allow_html=True)
