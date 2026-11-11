@@ -187,7 +187,7 @@ else:
                 <div style="font-weight: 800; font-size: 3.0rem; color: #FFFFFF; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
                     KINETIC GEARS
                 </div>
-                <div style="font-size: 1.0rem; color: #E2E8F0; margin-top: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+                <div style="font-size: 1.0rem; color: #E2E8F0; margin-top: 0px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
                     Login, Solve Maths and enjoy working !
                 </div>
             </div>
