@@ -31,7 +31,6 @@ if not img_base64:
 st.markdown(
     f"""
     <style>
-    /* 1. Full-screen background image setup */
     .stApp {{
         background-image: url("data:image/png;base64,{img_base64}");
         background-size: cover;
@@ -39,24 +38,18 @@ st.markdown(
         background-repeat: no-repeat;
         background-attachment: fixed;
     }}
-
-    /* 2. Hide default Streamlit headers */
     [data-testid="stHeader"], [data-testid="stFooter"] {{
         visibility: hidden;
         height: 0%;
         position: fixed;
     }}
-
-    /* 3. Transparent login container without background card or borders */
     .login-container {{
         background: transparent !important;
         padding: 1.5rem;
         width: 100%;
         max-width: 480px;
-        margin: -100px;
+        margin: 0 auto;
     }}
-
-    /* 4. Customizing text input fields to mimic clean bordered design */
     .stTextInput > div > div > input {{
         background-color: rgba(255, 255, 255, 0.95) !important;
         border: 1px solid #CBD5E1 !important;
@@ -68,9 +61,7 @@ st.markdown(
         border-color: #0284C7 !important;
         box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important;
     }}
-
-   /* 5. Customizing the Login Submit Button to match Log Out button style */
-    .stButton > button {
+    .stButton > button {{
         width: 100%;
         background: linear-gradient(180deg, #0d3b66 0%, #001e38 100%) !important;
         color: #FFFFFF !important;
@@ -81,8 +72,8 @@ st.markdown(
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
         transition: all 0.2s ease-in-out;
-    }
-    .stButton > button:hover {
+    }}
+    .stButton > button:hover {{
         background: linear-gradient(180deg, #114c82 0%, #002b4d 100%) !important;
         border-color: rgba(255, 255, 255, 0.3) !important;
     }}
