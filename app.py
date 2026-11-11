@@ -18,7 +18,7 @@ def get_base64_of_bin_file(bin_file):
         return None
 
 IMG_FILENAME = "background_login.png" 
-LOGO_FILENAME = "KG-Logo.png"
+LOGO_FILENAME = "KG-Logo.jpg"
 
 img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 logo_base64 = get_base64_of_bin_file(LOGO_FILENAME)
@@ -131,10 +131,17 @@ else:
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
-    
+        # Render Circular Logo or Fallback Gear Emoji safely
+        if logo_base64:
+            st.markdown(
+                f'<div style="text-align: center; margin-bottom: 8px;"><img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown('<div style="text-align: center; font-size: 3rem; margin-bottom: 8px;">⚙️</div>', unsafe_allow_html=True)
         
-        st.markdown(f"""
-            {logo_tag}
+        # Header Titles and Divider
+        st.markdown("""
             <div style="text-align: center; margin-bottom: 0.5rem;">
                 <div style="font-weight: 800; font-size: 2.0rem; color: #000000; letter-spacing: 0.5px;">
                     KINETIC GEARS
@@ -142,7 +149,6 @@ else:
                 <div style="font-size: 1.25rem; color: #000000; margin-top: 2px;">Login, Solve Maths and enjoy working !</div>
             </div>
             
-            <!-- Styled User Login Divider Header matching the image -->
             <div style="display: flex; align-items: center; text-align: center; color: #334155; font-weight: 600; font-size: 0.95rem; margin: 1.2rem 0 1.5rem 0;">
                 <div style="flex: 1; border-bottom: 1px solid #CBD5E1;"></div>
                 <span style="padding: 0 10px;">User Login</span>
