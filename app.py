@@ -36,7 +36,7 @@ if "authenticated" not in st.session_state:
 
 def login():
     st.markdown("<h2 class='main-title'>Kinetic Gears</h2>", unsafe_allow_html=True)
-    st.markdown("<p class='sub-title'>Client & Internal Portal Access</p>", unsafe_allow_html=True)
+    st.markdown("<p class='sub-title'>Login, Solve Maths and enjoy working !</p>", unsafe_allow_html=True)
     
     with st.form("login_form"):
         username = st.text_input("Username / Email")
