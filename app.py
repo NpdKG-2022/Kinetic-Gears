@@ -3,8 +3,7 @@ import base64
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="Kinetic Gears | Secure Login", 
-    page_icon="⚙️", 
+    page_title="Kinetic Gears", 
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -15,7 +14,6 @@ def get_base64_of_bin_file(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-# Make sure your uploaded background file name matches this:
 IMG_FILENAME = "background_login.png" 
 
 try:
@@ -24,7 +22,6 @@ except FileNotFoundError:
     st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your GitHub repository.")
     st.stop()
 
-# --- Custom Styling to Match the Reference Image Layout ---
 st.markdown(
     f"""
     <style>
@@ -135,7 +132,7 @@ else:
                 <div style="font-weight: 800; font-size: 1.4rem; color: #003366; letter-spacing: 0.5px;">
                     Kinetic Gears
                 </div>
-                <div style="font-size: 0.85rem; color: #64748B; margin-top: 2px;">Precision Components Manufacturing</div>
+                <div style="font-size: 0.85rem; color: #64748B; margin-top: 2px;">Login, Solve Maths and enjoy working !</div>
             </div>
             
             <!-- Styled User Login Divider Header matching the image -->
@@ -151,11 +148,11 @@ else:
             st.text_input("User ID", key="username_input", placeholder="👤  User ID")
             st.text_input("Password", type="password", key="password_input", placeholder="🔒  Password")
             
-            c1, c2 = st.columns(2)
-            with c1:
-                st.checkbox("Remember Me")
-            with c2:
-                st.markdown("<div style='text-align: right; font-size: 0.85rem; margin-top: 5px;'><a href='#' style='color: #0284C7; text-decoration: none;'>Forgot Password?</a></div>", unsafe_allow_html=True)
+            # c1, c2 = st.columns(2)
+            # with c1:
+          #      st.checkbox("Remember Me")
+           # with c2:
+           #     st.markdown("<div style='text-align: right; font-size: 0.85rem; margin-top: 5px;'><a href='#' style='color: #0284C7; text-decoration: none;'>Forgot Password?</a></div>", unsafe_allow_html=True)
             
             st.write("")
             submit_btn = st.form_submit_button("➔   Login")
