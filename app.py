@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import random
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -96,9 +97,27 @@ if 'logged_in' not in st.session_state:
 def check_login():
     valid_user = st.secrets.get("ADMIN_USER", "admin")
     valid_pass = st.secrets.get("ADMIN_PASSWORD", "admin1234")
+
+    # Validate CAPTCHA
+    try:
+        user_captcha_ans = int(st.session_state.get("captcha_input", "").strip())
+    except ValueError:
+        user_captcha_ans = -99999
+
+    if user_captcha_ans != st.session_state.get("captcha_ans"):
+        st.error("Incorrect CAPTCHA answer.")
+        # Reset captcha on failure
+        for key in ["captcha_num1", "captcha_num2", "captcha_op", "captcha_ans"]:
+            if key in st.session_state:
+                del st.session_state[key]
+        return
     
     if st.session_state.get("username_input") == valid_user and st.session_state.get("password_input") == valid_pass:
         st.session_state['logged_in'] = True
+        # Clear captcha state on successful login
+        for key in ["captcha_num1", "captcha_num2", "captcha_op", "captcha_ans"]:
+            if key in st.session_state:
+                del st.session_state[key]
         st.rerun()
     else:
         st.error("Invalid User ID or Password.")
@@ -117,6 +136,31 @@ if st.session_state['logged_in']:
     st.success("Successfully logged in.")
 
 else:
+    # --- Initialize CAPTCHA state ---
+    if "captcha_num1" not in st.session_state:
+        op = random.choice(["+", "-", "*", "/"])
+        if op == "+":
+            n1 = random.randint(10, 99)
+            n2 = random.randint(1, 99)
+            ans = n1 + n2
+        elif op == "-":
+            n1 = random.randint(10, 99)
+            n2 = random.randint(1, n1)  # ensure non-negative result
+            ans = n1 - n2
+        else:
+            n1 = random.randint(2, 9)
+            n2 = random.randint(2, 9)
+            ans = n1 * n2
+        else:
+            n1 = random.randint(2, 9)
+            n2 = random.randint(2, 9)
+            ans = n1 / n2
+        
+        st.session_state["captcha_num1"] = n1
+        st.session_state["captcha_num2"] = n2
+        st.session_state["captcha_op"] = op
+        st.session_state["captcha_ans"] = ans
+        
     # Vertical spacing to align the transparent form on the right side
     st.write("")
     st.write("")
@@ -142,7 +186,9 @@ else:
                 <div style="font-weight: 800; font-size: 2.0rem; color: #FFFFFF; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
                     KINETIC GEARS
                 </div>
-                <div style="font-size: 1.25rem; color: #E2E8F0; margin-top: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Login, Solve Maths and enjoy working !</div>
+                <div style="font-size: 1.25rem; color: #E2E8F0; margin-top: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+                    Login, Solve Maths and enjoy working !
+                </div>
             </div>
             
             <div style="display: flex; align-items: center; text-align: center; color: #CBD5E1; font-weight: 600; font-size: 0.95rem; margin: 1.2rem 0 1.5rem 0;">
@@ -156,6 +202,10 @@ else:
         with st.form("login_form"):
             st.text_input("User ID", key="username_input", placeholder="👤  User ID")
             st.text_input("Password", type="password", key="password_input", placeholder="🔒  Password")
+
+            # --- CAPTCHA Input Field ---
+            captcha_label = f"Solve: {st.session_state['captcha_num1']} {st.session_state['captcha_op']} {st.session_state['captcha_num2']} = ?"
+            st.text_input(captcha_label, key="captcha_input", placeholder="Enter number answer")
             
             st.write("")
             submit_btn = st.form_submit_button("➔   Let's Work")
