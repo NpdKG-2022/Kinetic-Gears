@@ -46,19 +46,6 @@ st.markdown(
         position: fixed;
     }}
 
-    /* 3. Main Login Card Container Styling */
-    .login-card {{
-        background-color: rgba(248, 250, 252, 0.95);
-        padding: 2.5rem 2rem;
-        border-radius: 24px;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        border: 1px solid #E2E8F0;
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-        backdrop-filter: blur(8px);
-    }}
-
     /* 4. Customizing text input fields to mimic the clean bordered design */
     .stTextInput > div > div > input {{
         background-color: #FFFFFF !important;
