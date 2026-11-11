@@ -46,22 +46,18 @@ st.markdown(
         position: fixed;
     }}
 
-    /* 3. Main Login Card Container Styling */
-    .login-card {{
-        background-color: rgba(248, 250, 252, 0.95);
-        padding: 2.5rem 2rem;
-        border-radius: 24px;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        border: 1px solid #E2E8F0;
+    /* 3. Transparent login container without background card or borders */
+    .login-container {{
+        background: transparent !important;
+        padding: 1.5rem;
         width: 100%;
         max-width: 480px;
         margin: 0 auto;
-        backdrop-filter: blur(8px);
     }}
 
-    /* 4. Customizing text input fields to mimic the clean bordered design */
+    /* 4. Customizing text input fields to mimic clean bordered design */
     .stTextInput > div > div > input {{
-        background-color: #FFFFFF !important;
+        background-color: rgba(255, 255, 255, 0.95) !important;
         border: 1px solid #CBD5E1 !important;
         border-radius: 8px !important;
         color: #0F172A !important;
@@ -121,20 +117,20 @@ if st.session_state['logged_in']:
     st.success("Successfully logged in.")
 
 else:
-    # Vertical spacing to perfectly align the card on the right-side empty space of your background image
+    # Vertical spacing to align the transparent form on the right side
     st.write("")
     st.write("")
 
-    # Create layout columns (pushing the login card to the right side)
+    # Create layout columns
     col1, col_center, col2 = st.columns([1.25, 1, 0.15])
 
     with col_center:
-        st.markdown('<div class="login-card">', unsafe_allow_html=True)
+        st.markdown('<div class="login-container">', unsafe_allow_html=True)
         
-        # Render Circular Logo inside Card Header (handles PNG data type)
+        # Render Logo naturally without circle wrapper or borders
         if logo_base64:
             st.markdown(
-                f'<div style="text-align: center; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>',
+                f'<div style="text-align: center; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_base64}" style="width: 85px; height: auto; object-fit: contain;" /></div>',
                 unsafe_allow_html=True
             )
         else:
@@ -143,16 +139,16 @@ else:
         # Header Titles and Divider
         st.markdown("""
             <div style="text-align: center; margin-bottom: 0.5rem;">
-                <div style="font-weight: 800; font-size: 2.0rem; color: #000000; letter-spacing: 0.5px;">
+                <div style="font-weight: 800; font-size: 2.0rem; color: #FFFFFF; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
                     KINETIC GEARS
                 </div>
-                <div style="font-size: 1.25rem; color: #000000; margin-top: 2px;">Login, Solve Maths and enjoy working !</div>
+                <div style="font-size: 1.25rem; color: #E2E8F0; margin-top: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Login, Solve Maths and enjoy working !</div>
             </div>
             
-            <div style="display: flex; align-items: center; text-align: center; color: #334155; font-weight: 600; font-size: 0.95rem; margin: 1.2rem 0 1.5rem 0;">
-                <div style="flex: 1; border-bottom: 1px solid #CBD5E1;"></div>
+            <div style="display: flex; align-items: center; text-align: center; color: #CBD5E1; font-weight: 600; font-size: 0.95rem; margin: 1.2rem 0 1.5rem 0;">
+                <div style="flex: 1; border-bottom: 1px solid rgba(255,255,255,0.3);"></div>
                 <span style="padding: 0 10px;">User Login</span>
-                <div style="flex: 1; border-bottom: 1px solid #CBD5E1;"></div>
+                <div style="flex: 1; border-bottom: 1px solid rgba(255,255,255,0.3);"></div>
             </div>
         """, unsafe_allow_html=True)
         
