@@ -85,7 +85,7 @@ st.markdown(
     .stButton > button:hover {
         background: linear-gradient(180deg, #114c82 0%, #002b4d 100%) !important;
         border-color: rgba(255, 255, 255, 0.3) !important;
-    }
+    }}
     </style>
     """,
     unsafe_allow_html=True
