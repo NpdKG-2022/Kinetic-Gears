@@ -41,18 +41,6 @@ st.markdown(
         position: fixed;
     }}
 
-    /* 3. Floating Glass/White Login Card Styling */
-    .login-card {{
-        background-color: #F8FAFC;
-        padding: 2.5rem 2rem;
-        border-radius: 28px;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        border: 1px solid #E2E8F0;
-        width: 100%;
-        max-width: 440px;
-        margin: 0 auto;
-    }}
-
     /* 4. Customizing text input fields to mimic the clean bordered design */
     .stTextInput > div > div > input {{
         background-color: #FFFFFF !important;
