@@ -147,14 +147,15 @@ else:
             n1 = random.randint(10, 99)
             n2 = random.randint(1, n1)  # ensure non-negative result
             ans = n1 - n2
-        else:
+        elif op == "*":
             n1 = random.randint(2, 9)
             n2 = random.randint(2, 9)
             ans = n1 * n2
-        else:
-            n1 = random.randint(2, 9)
+        else: # division '/'
+            # ensure clean integer division
             n2 = random.randint(2, 9)
-            ans = n1 / n2
+            ans = random.randint(2, 9)
+            n1 = n2 * ans
         
         st.session_state["captcha_num1"] = n1
         st.session_state["captcha_num2"] = n2
