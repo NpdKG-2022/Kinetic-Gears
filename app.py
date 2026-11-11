@@ -18,7 +18,7 @@ def get_base64_of_bin_file(bin_file):
         return None
 
 IMG_FILENAME = "background_login.png" 
-LOGO_FILENAME = "KG-Logo.jpg"
+LOGO_FILENAME = "KG-Logo.png"
 
 img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 logo_base64 = get_base64_of_bin_file(LOGO_FILENAME)
@@ -44,6 +44,19 @@ st.markdown(
         visibility: hidden;
         height: 0%;
         position: fixed;
+    }}
+
+    /* 3. Main Login Card Container Styling */
+    .login-card {{
+        background-color: rgba(248, 250, 252, 0.95);
+        padding: 2.5rem 2rem;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        border: 1px solid #E2E8F0;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        backdrop-filter: blur(8px);
     }}
 
     /* 4. Customizing text input fields to mimic the clean bordered design */
@@ -117,6 +130,15 @@ else:
 
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
+        
+        # Render Circular Logo inside Card Header (handles PNG data type)
+        if logo_base64:
+            st.markdown(
+                f'<div style="text-align: center; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown('<div style="text-align: center; font-size: 3rem; margin-bottom: 10px;">⚙️</div>', unsafe_allow_html=True)
         
         # Header Titles and Divider
         st.markdown("""
