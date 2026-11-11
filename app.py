@@ -175,7 +175,7 @@ else:
         # Render Logo naturally without circle wrapper or borders
         if logo_base64:
             st.markdown(
-                f'<div style="text-align: center; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_base64}" style="width: 150px; height: auto; object-fit: contain;" /></div>',
+                f'<div style="text-align: center; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_base64}" style="width: 100px; height: auto; object-fit: contain;" /></div>',
                 unsafe_allow_html=True
             )
         else:
