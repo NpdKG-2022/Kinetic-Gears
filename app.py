@@ -69,22 +69,23 @@ st.markdown(
         box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important;
     }}
 
-    /* 5. Customizing the Login Submit Button */
-    .stButton > button {{
+   /* 5. Customizing the Login Submit Button to match Log Out button style */
+    .stButton > button {
         width: 100%;
-        background: linear-gradient(180deg, #004080 0%, #002244 100%) !important;
+        background: linear-gradient(180deg, #0d3b66 0%, #001e38 100%) !important;
         color: #FFFFFF !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        border-radius: 10px !important;
-        padding: 0.7rem 1rem !important;
-        border: none !important;
-        box-shadow: 0 4px 12px rgba(0, 34, 68, 0.3) !important;
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        border-radius: 12px !important;
+        padding: 0.6rem 1rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
         transition: all 0.2s ease-in-out;
-    }}
-    .stButton > button:hover {{
-        background: linear-gradient(180deg, #0059b3 0%, #003366 100%) !important;
-    }}
+    }
+    .stButton > button:hover {
+        background: linear-gradient(180deg, #114c82 0%, #002b4d 100%) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
