@@ -3,32 +3,32 @@ import base64
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="Kinetic Gears Portal | Secure Login", 
+    page_title="Kinetic Gears | Secure Login", 
     page_icon="⚙️", 
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# --- Helper Function: Convert Image to Base64 ---
+# --- Helper Function: Load Background Image ---
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
-# Ensure this matches the exact filename of the image you uploaded to GitHub
+# Make sure your uploaded background file name matches this:
 IMG_FILENAME = "background_login.png" 
 
 try:
     img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 except FileNotFoundError:
-    st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your repository. Please make sure it is uploaded.")
+    st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your GitHub repository.")
     st.stop()
 
-# --- Custom Styling & Layout ---
+# --- Custom Styling to Match the Reference Image Layout ---
 st.markdown(
     f"""
     <style>
-    /* 1. Set the background image across the entire app */
+    /* 1. Full-screen background image setup */
     .stApp {{
         background-image: url("data:image/png;base64,{img_base64}");
         background-size: cover;
@@ -37,40 +37,60 @@ st.markdown(
         background-attachment: fixed;
     }}
 
-    /* 2. Hide default Streamlit Header and Footer */
+    /* 2. Hide default Streamlit headers */
     [data-testid="stHeader"], [data-testid="stFooter"] {{
         visibility: hidden;
         height: 0%;
         position: fixed;
     }}
 
-    /* 3. Style input fields */
-    .stTextInput>div>div>input {{
-        color: #0F172A;
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 8px;
-        border: 1px solid #CBD5E1;
-        padding: 0.6rem 1rem;
+    /* 3. Floating Glass/White Login Card Styling */
+    .login-card {{
+        background-color: #F8FAFC;
+        padding: 2.5rem 2rem;
+        border-radius: 28px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        border: 1px solid #E2E8F0;
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
     }}
 
-    /* 4. Login Form Card Wrapper */
-    .login-box {{
-        background-color: rgba(248, 250, 252, 0.92);
-        padding: 35px;
-        border-radius: 20px;
+    /* 4. Customizing text input fields to mimic the clean bordered design */
+    .stTextInput > div > div > input {{
+        background-color: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 8px !important;
+        color: #0F172A !important;
+        padding: 0.6rem 1rem !important;
+    }}
+    .stTextInput > div > div > input:focus {{
+        border-color: #0284C7 !important;
+        box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important;
+    }}
+
+    /* 5. Customizing the Login Submit Button */
+    .stButton > button {{
         width: 100%;
-        max-width: 420px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        border: 1px solid #E2E8F0;
-        margin: 0 auto;
-        backdrop-filter: blur(8px);
+        background: linear-gradient(180deg, #004080 0%, #002244 100%) !important;
+        color: #FFFFFF !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        padding: 0.7rem 1rem !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(0, 34, 68, 0.3) !important;
+        transition: all 0.2s ease-in-out;
+    }}
+    .stButton > button:hover {{
+        background: linear-gradient(180deg, #0059b3 0%, #003366 100%) !important;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# --- Authentication State Management ---
+# --- Authentication Logic ---
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 
@@ -84,11 +104,9 @@ def check_login():
     else:
         st.error("Invalid User ID or Password.")
 
-# --- Render Application Views ---
+# --- Application Views ---
 if st.session_state['logged_in']:
-    # Restore header visibility for dashboard view
     st.markdown("""<style>[data-testid="stHeader"] {visibility: visible; height: auto;}</style>""", unsafe_allow_html=True)
-    
     st.sidebar.markdown("### ⚙️ Kinetic Gears")
     st.sidebar.write(f"Logged in as: **{st.secrets.get('ADMIN_USER', 'admin')}**")
     
@@ -100,38 +118,49 @@ if st.session_state['logged_in']:
     st.success("Successfully logged into the precision manufacturing platform workspace.")
 
 else:
-    # Vertical spacers to match the right-side card position on your background image
+    # Vertical spacing to perfectly align the card on the right-side empty space of your background image
     st.write("")
     st.write("")
-    
-    # Create columns to push the login card to the right side
-    col1, col_center, col2 = st.columns([1.1, 1, 0.2])
+
+    # Create layout columns (pushing the login card to the right side)
+    col1, col_center, col2 = st.columns([1.25, 1, 0.15])
 
     with col_center:
-        st.markdown('<div class="login-box">', unsafe_allow_html=True)
+        st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
+        # Header with Gear Icon and Firm Name matching reference
         st.markdown("""
-            <div style="text-align: center; margin-bottom: 1rem;">
-                <span style="font-size: 2.8rem;">⚙️</span>
-                <div style="font-weight: 800; font-size: 1.2rem; color: #003366; letter-spacing: 0.5px;">
-                    KINETIC GEARS
+            <div style="text-align: center; margin-bottom: 0.5rem;">
+                <div style="font-size: 3rem; margin-bottom: -5px;">⚙️</div>
+                <div style="font-weight: 800; font-size: 1.4rem; color: #003366; letter-spacing: 0.5px;">
+                    Kinetic Gears
                 </div>
-                <div style="font-size: 0.8rem; color: #64748B; margin-top: 2px;">Precision Manufacturing Portal</div>
+                <div style="font-size: 0.85rem; color: #64748B; margin-top: 2px;">Precision Components Manufacturing</div>
             </div>
-            <div style="border-bottom: 1px solid #CBD5E1; margin-bottom: 1.5rem;"></div>
+            
+            <!-- Styled User Login Divider Header matching the image -->
+            <div style="display: flex; align-items: center; text-align: center; color: #334155; font-weight: 600; font-size: 0.95rem; margin: 1.2rem 0 1.5rem 0;">
+                <div style="flex: 1; border-bottom: 1px solid #CBD5E1;"></div>
+                <span style="padding: 0 10px;">User Login</span>
+                <div style="flex: 1; border-bottom: 1px solid #CBD5E1;"></div>
+            </div>
         """, unsafe_allow_html=True)
         
-        # Form inputs
-        st.text_input("User ID", key="username_input", placeholder="Enter your User ID")
-        st.text_input("Password", type="password", key="password_input", placeholder="Enter your password")
-        
-        c1, c2 = st.columns(2)
-        with c1:
-            st.checkbox("REMEMBER ME")
-        with c2:
-            st.markdown("<div style='text-align: right; font-size: 0.8rem; margin-top: 5px;'><a href='#' style='color: #0284C7; text-decoration: none;'>FORGOT PASSWORD?</a></div>", unsafe_allow_html=True)
-        
-        st.write("")
-        st.button("LOGIN", on_click=check_login, use_container_width=True)
-        
+        # Form Container for Inputs
+        with st.form("login_form"):
+            st.text_input("User ID", key="username_input", placeholder="👤  User ID")
+            st.text_input("Password", type="password", key="password_input", placeholder="🔒  Password")
+            
+            c1, c2 = st.columns(2)
+            with c1:
+                st.checkbox("Remember Me")
+            with c2:
+                st.markdown("<div style='text-align: right; font-size: 0.85rem; margin-top: 5px;'><a href='#' style='color: #0284C7; text-decoration: none;'>Forgot Password?</a></div>", unsafe_allow_html=True)
+            
+            st.write("")
+            submit_btn = st.form_submit_button("➔   Login")
+            
+            if submit_btn:
+                check_login()
+
         st.markdown('</div>', unsafe_allow_html=True)
