@@ -8,17 +8,22 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- Helper Function: Load Background Image ---
+# --- Helper Function: Load Background & Logo Images ---
 def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+    try:
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except FileNotFoundError:
+        return None
 
 IMG_FILENAME = "background_login.png" 
+LOGO_FILENAME = "KG-Logo.jpg"[cite: 7]
 
-try:
-    img_base64 = get_base64_of_bin_file(IMG_FILENAME)
-except FileNotFoundError:
+img_base64 = get_base64_of_bin_file(IMG_FILENAME)
+logo_base64 = get_base64_of_bin_file(LOGO_FILENAME)
+
+if not img_base64:
     st.error(f"Error: Required background image '{IMG_FILENAME}' not found in your GitHub repository.")
     st.stop()
 
@@ -39,6 +44,19 @@ st.markdown(
         visibility: hidden;
         height: 0%;
         position: fixed;
+    }}
+
+    /* 3. Main Login Card Container Styling */
+    .login-card {{
+        background-color: rgba(248, 250, 252, 0.95);
+        padding: 2.5rem 2rem;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        border: 1px solid #E2E8F0;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        backdrop-filter: blur(8px);
     }}
 
     /* 4. Customizing text input fields to mimic the clean bordered design */
@@ -113,9 +131,12 @@ else:
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
-        # Header with Gear Icon and Firm Name matching reference
-        st.markdown("""
+        # Header with Circular Logo Frame, Title and Tagline
+        logo_tag = f'<img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 8px;" />' if logo_base64 else '<div style="font-size: 3rem;">⚙️</div>'
+        
+        st.markdown(f"""
             <div style="text-align: center; margin-bottom: 0.5rem;">
+                {logo_tag}
                 <div style="font-weight: 800; font-size: 2.0rem; color: #000000; letter-spacing: 0.5px;">
                     KINETIC GEARS
                 </div>
@@ -134,12 +155,6 @@ else:
         with st.form("login_form"):
             st.text_input("User ID", key="username_input", placeholder="👤  User ID")
             st.text_input("Password", type="password", key="password_input", placeholder="🔒  Password")
-            
-            # c1, c2 = st.columns(2)
-            # with c1:
-          #      st.checkbox("Remember Me")
-           # with c2:
-           #     st.markdown("<div style='text-align: right; font-size: 0.85rem; margin-top: 5px;'><a href='#' style='color: #0284C7; text-decoration: none;'>Forgot Password?</a></div>", unsafe_allow_html=True)
             
             st.write("")
             submit_btn = st.form_submit_button("➔   Login")
