@@ -2,8 +2,7 @@ import streamlit as st
 
 # Page configuration
 st.set_page_config(
-    page_title="Kinetic Gears | Portal",
-    page_icon="⚙️",
+    page_title="Kinetic Gears",
     layout="centered"
 )
 
