@@ -158,7 +158,7 @@ else:
             st.text_input("Password", type="password", key="password_input", placeholder="🔒  Password")
             
             st.write("")
-            submit_btn = st.form_submit_button("➔   Login")
+            submit_btn = st.form_submit_button("➔   Let's Work")
             
             if submit_btn:
                 check_login()
