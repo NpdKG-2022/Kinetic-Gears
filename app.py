@@ -18,7 +18,7 @@ def get_base64_of_bin_file(bin_file):
         return None
 
 IMG_FILENAME = "background_login.png" 
-LOGO_FILENAME = "KG-Logo.jpg"
+LOGO_FILENAME = "KG-Logo.png"
 
 img_base64 = get_base64_of_bin_file(IMG_FILENAME)
 logo_base64 = get_base64_of_bin_file(LOGO_FILENAME)
@@ -131,11 +131,7 @@ else:
     with col_center:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
         
-        # Header with Safe Fallback for Logo
-        if logo_base64:
-            logo_tag = f'<div style="text-align: center; margin-bottom: 8px;"><img src="data:image/jpeg;base64,{logo_base64}" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #CBD5E1; box-shadow: 0 4px 10px rgba(0,0,0,0.15);" /></div>'
-        else:
-            logo_tag = '<div style="text-align: center; font-size: 3rem; margin-bottom: 8px;">⚙️</div>'
+    
         
         st.markdown(f"""
             {logo_tag}
