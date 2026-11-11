@@ -93,7 +93,7 @@ if 'logged_in' not in st.session_state:
 
 def check_login():
     valid_user = st.secrets.get("ADMIN_USER", "admin")
-    valid_pass = st.secrets.get("ADMIN_PASSWORD", "gear123")
+    valid_pass = st.secrets.get("ADMIN_PASSWORD", "admin1234")
     
     if st.session_state.get("username_input") == valid_user and st.session_state.get("password_input") == valid_pass:
         st.session_state['logged_in'] = True
@@ -104,7 +104,7 @@ def check_login():
 # --- Application Views ---
 if st.session_state['logged_in']:
     st.markdown("""<style>[data-testid="stHeader"] {visibility: visible; height: auto;}</style>""", unsafe_allow_html=True)
-    st.sidebar.markdown("### ⚙️ Kinetic Gears")
+    st.sidebar.markdown("### Kinetic Gears")
     st.sidebar.write(f"Logged in as: **{st.secrets.get('ADMIN_USER', 'admin')}**")
     
     if st.sidebar.button("Log Out"):
@@ -112,7 +112,7 @@ if st.session_state['logged_in']:
         st.rerun()
 
     st.title("Kinetic Gears Dashboard")
-    st.success("Successfully logged into the precision manufacturing platform workspace.")
+    st.success("Successfully logged in.")
 
 else:
     # Vertical spacing to perfectly align the card on the right-side empty space of your background image
@@ -128,11 +128,10 @@ else:
         # Header with Gear Icon and Firm Name matching reference
         st.markdown("""
             <div style="text-align: center; margin-bottom: 0.5rem;">
-                <div style="font-size: 3rem; margin-bottom: -5px;">⚙️</div>
-                <div style="font-weight: 800; font-size: 1.4rem; color: #003366; letter-spacing: 0.5px;">
-                    Kinetic Gears
+                <div style="font-weight: 800; font-size: 2.0rem; color: #000000; letter-spacing: 0.5px;">
+                    KINETIC GEARS
                 </div>
-                <div style="font-size: 0.85rem; color: #64748B; margin-top: 2px;">Login, Solve Maths and enjoy working !</div>
+                <div style="font-size: 1.25rem; color: #000000; margin-top: 2px;">Login, Solve Maths and enjoy working !</div>
             </div>
             
             <!-- Styled User Login Divider Header matching the image -->
