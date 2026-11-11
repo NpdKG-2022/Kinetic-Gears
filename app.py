@@ -53,7 +53,7 @@ st.markdown(
         padding: 1.5rem;
         width: 100%;
         max-width: 480px;
-        margin: 0 auto;
+        margin: -100px;
     }}
 
     /* 4. Customizing text input fields to mimic clean bordered design */
